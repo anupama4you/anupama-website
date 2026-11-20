@@ -26,6 +26,113 @@
     if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); }
   });
 
+  /* ── Light / dark toggle ───────────────────────────────
+     Follows the device until the visitor picks; the choice is remembered. */
+  const themeBtn = $('[data-theme-toggle]');
+  const root = document.documentElement;
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : systemDark.matches);
+  const themeMetas = $$('meta[name="theme-color"]');
+  const syncTheme = () => {
+    const dark = isDark();
+    themeBtn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    // Browser chrome colour: once the visitor has chosen, both metas use that theme's colour
+    if (root.dataset.theme) themeMetas.forEach((m) => { m.content = dark ? '#000000' : '#F5F5F7'; });
+  };
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    const apply = () => {
+      root.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (_) { /* private mode: still switches for this visit */ }
+      syncTheme();
+    };
+    // Soft cross-fade where supported, like the OS appearance switch
+    if (document.startViewTransition && !reduceMotion) document.startViewTransition(apply);
+    else apply();
+  });
+  systemDark.addEventListener('change', syncTheme);
+  syncTheme();
+
+  /* ── Project cards: spotlight follows the cursor ──────── */
+  $$('.card').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+
+  /* ── Code challenge: check the answer against a salted hash ─
+     Must match .challenge/generate.mjs (normalize, salt and claim-code format). */
+  const form = $('[data-challenge]');
+  if (form) {
+    const input = $('#challenge-answer', form);
+    const result = $('[data-result]', form);
+    const claim = $('[data-claim]', form);
+    const normalize = (s) => s.toLowerCase().replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
+    const sha256 = async (s) => {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+      return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const answer = normalize(input.value);
+      if (!answer) { input.focus(); return; }
+      if (!window.crypto?.subtle) { result.textContent = 'Your browser can\'t check answers here. Try a recent browser over https.'; return; }
+      const ok = (await sha256('anupama.dev/challenge/v1:' + answer)) === form.dataset.hash;
+      result.classList.toggle('is-wrong', !ok);
+      if (!ok) {
+        result.textContent = 'Not quite. Check your merge-base rules and try again.';
+        form.classList.remove('is-shake'); void form.offsetWidth; form.classList.add('is-shake');
+        return;
+      }
+      const h = (await sha256('claim:v1:' + answer)).slice(0, 12).toUpperCase();
+      const code = `${h.slice(0, 4)}-${h.slice(4, 8)}-${h.slice(8)}`;
+      result.textContent = '';
+      $('[data-code]', form).textContent = code;
+      const body = `Hi Anupama,\n\nI solved The lost commit.\n\nClaim code: ${code}\nName for the wall: \nLink (GitHub, LinkedIn or site, optional): \nLanguage I solved it in: \n`;
+      $('[data-mail]', form).href = `mailto:anupama.dilshan@icloud.com?subject=${encodeURIComponent(`The lost commit: claim ${code}`)}&body=${encodeURIComponent(body)}`;
+      claim.hidden = false;
+      $('[data-copy]', form).focus();
+    });
+    $('[data-copy]', form).addEventListener('click', async (e) => {
+      try { await navigator.clipboard.writeText($('[data-code]', form).textContent); e.target.textContent = 'Copied'; }
+      catch (_) { e.target.textContent = 'Select and copy'; }
+      setTimeout(() => { e.target.textContent = 'Copy'; }, 1800);
+    });
+  }
+
+  /* ── Contact form: send to Netlify Forms without leaving the page ─
+     Without JS the form still posts normally and Netlify shows its own thank-you page. */
+  const contactForm = $('[data-contact-form]');
+  if (contactForm) {
+    const status = $('[data-contact-status]', contactForm);
+    const sendBtn = $('.contact__send', contactForm);
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!contactForm.reportValidity()) return;
+      status.className = 'contact__status';
+      status.textContent = 'Sending…';
+      sendBtn.disabled = true;
+      try {
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(contactForm)).toString(),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        contactForm.reset();
+        status.classList.add('is-ok');
+        status.textContent = 'Thanks! Your message is on its way. I usually reply within a day.';
+      } catch (_) {
+        status.classList.add('is-error');
+        status.innerHTML = 'Sorry, that didn\'t send. Please email me at <a href="mailto:anupama.dilshan@icloud.com">anupama.dilshan@icloud.com</a>.';
+      } finally {
+        sendBtn.disabled = false;
+      }
+    });
+  }
+
   /* ── Active nav link ───────────────────────────────────── */
   const links = new Map($$('.nav a[href^="#"]').map((a) => [a.getAttribute('href').slice(1), a]));
   const spy = new IntersectionObserver((entries) => {
@@ -35,7 +142,21 @@
       links.get(en.target.id)?.classList.add('is-active');
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['story', 'work', 'stack', 'life', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+  ['story', 'work', 'stack', 'life', 'challenge', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+
+  /* ── Smooth in-page anchor scrolling ───────────────────
+     Done in JS rather than CSS `scroll-behavior: smooth`, which fights
+     ScrollTrigger's scroll restoration and makes pins jump when scrolling back up. */
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    const target = id ? document.getElementById(id) : document.documentElement;
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    history.pushState(null, '', id ? `#${id}` : location.pathname);
+  });
 
   /* ── Terminal typing in the hero ───────────────────────── */
   const cmd = $('[data-type]');
@@ -108,15 +229,14 @@
       return;
     }
 
-    const mm = gsap.matchMedia();
 
     /* 1. Hero: one orchestrated load moment */
-    const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
     intro
       .from('.hero__title .line > span', { yPercent: 110, duration: 1.1, stagger: 0.12 }, 0.25)
-      .from('.hero__lede, .hero__actions, .hero__facts', { y: 24, autoAlpha: 0, duration: 0.9, stagger: 0.1 }, 0.75)
-      .from('[data-hero-photo] .window', { y: 40, rotate: 6, scale: 0.94, autoAlpha: 0, duration: 1.3 }, 0.35)
-      .from('.status', { x: -20, autoAlpha: 0, duration: 0.7 }, 1.2);
+      .from('.hero__lede, .hero__actions, .hero__facts', { y: 16, autoAlpha: 0, duration: 0.9, stagger: 0.1 }, 0.75)
+      .from('[data-hero-photo] .window', { y: 24, scale: 0.96, autoAlpha: 0, duration: 1.2 }, 0.35)
+      .from('.status', { y: 10, autoAlpha: 0, duration: 0.7 }, 1.1);
 
     /* Hero parallax as you leave it */
     gsap.to('[data-hero-photo]', {
@@ -124,7 +244,7 @@
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
     });
     gsap.to('[data-hero-copy]', {
-      y: -60, autoAlpha: 0.15, ease: 'none',
+      y: -40, autoAlpha: 0.2, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: '30% top', end: 'bottom top', scrub: true },
     });
 
@@ -146,8 +266,8 @@
     });
     $$('[data-commit]').forEach((c) => {
       gsap.from(c.querySelectorAll('.commit__meta, .commit__msg, p, .diff, .link-arrow'), {
-        x: 28, autoAlpha: 0, duration: 0.8, stagger: 0.07, ease: 'power3.out',
-        scrollTrigger: { trigger: c, start: 'top 82%', once: true },
+        y: 16, autoAlpha: 0, duration: 0.8, stagger: 0.06, ease: 'expo.out',
+        scrollTrigger: { trigger: c, start: 'top 85%', once: true },
       });
     });
     const branch = $('.branch path');
@@ -155,42 +275,49 @@
       const len = branch.getTotalLength();
       gsap.fromTo(branch, { strokeDasharray: `${len}`, strokeDashoffset: len }, {
         strokeDashoffset: 0, ease: 'none',
-        onComplete: () => gsap.set(branch, { clearProps: 'strokeDasharray,strokeDashoffset' }),
         scrollTrigger: { trigger: '.commit--branch', start: 'top 80%', end: 'top 45%', scrub: true },
       });
     }
 
-    /* 4. Work: pinned horizontal gallery on large screens */
-    const work = $('[data-work]');
-    const track = $('[data-work-track]');
-    mm.add('(min-width: 900px) and (min-height: 620px)', () => {
-      work.classList.add('is-horizontal');
-      const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
-      const tween = gsap.to(track, {
-        x: () => -distance(), ease: 'none',
-        scrollTrigger: {
-          trigger: work, start: 'top top', end: () => `+=${distance()}`,
-          pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1,
-        },
+    /* 4. Work (bento grid)
+          Entrance: each row scales up and comes into focus, slightly staggered. */
+    const cards = $$('[data-work-track] .card');
+    gsap.set(cards, { y: 40, scale: 0.94, autoAlpha: 0, filter: 'blur(8px)' });
+    ScrollTrigger.batch(cards, {
+      start: 'top 92%', once: true,
+      onEnter: (batch) => gsap.to(batch, {
+        y: 0, scale: 1, autoAlpha: 1, filter: 'blur(0px)', duration: 1.1, stagger: 0.09, ease: 'expo.out',
+        clearProps: 'filter',
+      }),
+    });
+    /* Screenshots drift inside their frames as the page scrolls (both directions) */
+    $$('[data-work-track] .card__media img').forEach((img) => {
+      gsap.fromTo(img, { yPercent: -5 }, {
+        yPercent: 5, ease: 'none',
+        scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
       });
-      // Cards ease up from the right as they enter the viewport
-      $$('.card', track).forEach((card) => {
-        gsap.from(card.querySelector('.card__media img'), {
-          scale: 1.25, ease: 'none',
-          scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left right', end: 'right 60%', scrub: true },
+    });
+    /* Gentle 3D tilt toward the cursor (mouse/trackpad only) */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      cards.forEach((card) => {
+        const max = card.classList.contains('card--feature') || card.classList.contains('card--more') ? 2.5 : 5;
+        gsap.set(card, { transformPerspective: 1000 });
+        const rx = gsap.quickTo(card, 'rotationX', { duration: 0.6, ease: 'power3.out' });
+        const ry = gsap.quickTo(card, 'rotationY', { duration: 0.6, ease: 'power3.out' });
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          ry(px * max * 2);
+          rx(-py * max * 2);
         });
+        card.addEventListener('pointerleave', () => { rx(0); ry(0); });
       });
-      return () => work.classList.remove('is-horizontal');
-    });
-    mm.add('(max-width: 899px), (max-height: 619px)', () => {
-      $$('.card', track).forEach((card) => {
-        gsap.from(card, { y: 40, autoAlpha: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
-      });
-    });
+    }
 
     /* 5. Stack: the file "types" itself in line by line */
     gsap.from('.code .ln', {
-      autoAlpha: 0, x: -14, duration: 0.5, stagger: 0.08, ease: 'power2.out',
+      autoAlpha: 0, y: 6, duration: 0.5, stagger: 0.06, ease: 'power2.out',
       scrollTrigger: { trigger: '[data-editor]', start: 'top 75%', once: true },
     });
 
@@ -203,9 +330,15 @@
       });
     });
 
+    /* 6b. Challenge cards rise in together */
+    gsap.from('.challenge__brief, .challenge__form, .challenge__wall', {
+      y: 24, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'expo.out',
+      scrollTrigger: { trigger: '.challenge__grid', start: 'top 82%', once: true },
+    });
+
     /* 7. Contact */
-    gsap.from('.contact__title, .contact__lede, .contact__email, .socials', {
-      y: 40, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+    gsap.from('.contact__title, .contact__lede, .contact__email, .socials, .contact__form', {
+      y: 20, autoAlpha: 0, duration: 1, stagger: 0.08, ease: 'expo.out',
       scrollTrigger: { trigger: '.contact', start: 'top 70%', once: true },
     });
 

@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Anupama Dilshan · Full-stack software engineer</title>
   <meta name="description" content="Anupama Dilshan is a full-stack software engineer in Adelaide building transport systems for the South Australian Government and shipping AI products. From Sri Lanka to South Australia, one commit at a time.">
-  <meta name="theme-color" content="#0C1C21">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F5F5F7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
   <meta property="og:title" content="Anupama Dilshan · Full-stack software engineer">
   <meta property="og:description" content="From Sri Lanka to South Australia, one commit at a time.">
   <meta property="og:image" content="assets/img/me.webp">
@@ -13,8 +15,15 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    /* Apply a saved theme before first paint so there's no flash */
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -26,11 +35,12 @@
       <a class="brand" href="#top" aria-label="Anupama Dilshan, back to top">
         <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M10 6v20" stroke="currentColor" stroke-opacity=".35" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M10 12c0 5 12 3 12 9" fill="none" stroke="var(--mint)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="10" cy="8" r="3" fill="var(--amber)"/><circle cx="22" cy="22" r="3" fill="var(--mint)"/><circle cx="10" cy="24" r="3" fill="currentColor"/>
+          <path d="M10 12c0 5 12 3 12 9" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="10" cy="8" r="3" fill="var(--blue)"/><circle cx="22" cy="22" r="3" fill="var(--green)"/><circle cx="10" cy="24" r="3" fill="currentColor"/>
         </svg>
         <span>anupama<span class="brand__tld">.dev</span></span>
       </a>
+      <div class="header__end">
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-btn>
         <span class="menu-btn__lines" aria-hidden="true"></span>
         <span class="sr-only">Menu</span>
@@ -40,8 +50,14 @@
         <a href="#work">Work</a>
         <a href="#stack">Stack</a>
         <a href="#life">Off the clock</a>
+        <a href="#challenge">Challenge</a>
         <a class="nav__cta" href="#contact">Get in touch</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      </div>
     </div>
   </header>
 
@@ -80,11 +96,12 @@
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span class="window__name">anupama.webp</span>
             </div>
-            <img src="assets/img/me.webp" width="900" height="900" alt="Portrait of Anupama Dilshan smiling, wearing a dark blazer over a black t-shirt in a softly lit workspace" fetchpriority="high">
+            <img class="photo--light" src="assets/img/me.webp" width="900" height="900" alt="Portrait of Anupama Dilshan smiling, wearing a light grey sweater against a soft lavender background" fetchpriority="high">
+            <img class="photo--dark" src="assets/img/me-dark.webp" width="900" height="900" loading="lazy" alt="Portrait of Anupama Dilshan smiling, wearing a grey sweater against a dark navy background">
           </div>
           <figcaption class="status">
             <span class="status__dot" aria-hidden="true"></span>
-            Open to new roles and interesting projects
+            Open to new roles<span class="status__long">&nbsp;and interesting projects</span>
           </figcaption>
         </figure>
       </div>
@@ -222,16 +239,18 @@
         <header class="work__intro">
           <h2 class="section-title" id="work-title">Things I've shipped</h2>
           <p>Live products, published research and client builds across AI, healthcare, e-commerce and mobile.</p>
-          <p class="work__hint" aria-hidden="true">Keep scrolling</p>
         </header>
 
-        <article class="card">
-          <div class="card__media"><img src="assets/img/ellie.webp" width="1400" height="788" loading="lazy" alt="Ellie AI receptionist dashboard showing recent calls and bookings"></div>
+        <article class="card card--feature">
+          <div class="card__media"><img src="assets/img/ellie.webp" width="1400" height="934" loading="lazy" alt="Ellie AI Frontdesk dashboard showing a live call, today's stats, recent calls and upcoming bookings"></div>
           <div class="card__body">
             <p class="card__cat">AI product, live</p>
-            <h3 class="card__title">Ellie, AI receptionist</h3>
+            <h3 class="card__title">Ellie AI Frontdesk</h3>
             <p>Answers every call 24/7, books appointments and sends SMS confirmations. It personalises itself to any business by reading its website, so there's no manual setup.</p>
             <ul class="tags"><li>VAPI</li><li>GPT-4o</li><li>Serverless</li><li>SMS API</li></ul>
+            <div class="card__links">
+              <a href="https://callellie.com" target="_blank" rel="noopener">Visit site</a>
+            </div>
           </div>
         </article>
 
@@ -371,39 +390,104 @@
           <!-- Travel -->
           <article class="hobby hobby--travel" data-hobby="travel">
             <figure class="hobby__art hobby__art--photo">
-              <img src="assets/img/hobby-travel.webp" width="1000" height="600" loading="lazy" alt="A blue train crossing the Nine Arches Bridge through green hills in Ella, Sri Lanka">
+              <img src="assets/img/hobby-travel.webp" width="750" height="1000" loading="lazy" alt="Anupama in a blue jacket, beanie and sunglasses, grinning from an alpine toboggan at Thredbo">
             </figure>
             <div class="hobby__body">
               <h3>Travelling</h3>
               <p>I've lived and worked across three countries, and I'm always planning the next trip. New places reset how I think, and nothing teaches you to work with different people faster.</p>
-              <p class="credit">Photo: <a href="https://unsplash.com/photos/jpTT_SAU034" target="_blank" rel="noopener">Hendrik Cornelissen</a> on Unsplash</p>
             </div>
           </article>
 
           <!-- Content creation -->
           <article class="hobby hobby--create" data-hobby="create">
             <figure class="hobby__art hobby__art--photo">
-              <img src="assets/img/hobby-create.webp" width="1000" height="600" loading="lazy" alt="A creator's desk with two monitors, cameras, lenses and a glowing light pad">
+              <img src="assets/img/hobby-create.webp" width="1000" height="750" loading="lazy" alt="Anupama filming with a pocket gimbal camera, wild elephants grazing by a lake behind him">
             </figure>
             <div class="hobby__body">
               <h3>Content creation</h3>
               <p>I write about what I build, the tools I use and the gear on my desk. Explaining something clearly is the best test of whether I really understand it.</p>
               <a class="link-arrow" href="https://medium.com/@anupama4you" target="_blank" rel="noopener">Read on Medium</a>
-              <p class="credit">Photo: <a href="https://unsplash.com/photos/aSoQQLyPe1U" target="_blank" rel="noopener">Jakub Żerdzicki</a> on Unsplash</p>
             </div>
           </article>
 
           <!-- Cricket -->
           <article class="hobby hobby--cricket" data-hobby="cricket">
             <figure class="hobby__art hobby__art--photo">
-              <img src="assets/img/hobby-cricket.webp" width="1000" height="600" loading="lazy" alt="A worn red cricket ball resting in green grass">
+              <img src="assets/img/hobby-cricket.webp" width="1000" height="667" loading="lazy" alt="Anupama playing a sweep shot in cricket whites as the wicketkeeper watches">
             </figure>
             <div class="hobby__body">
               <h3>Cricket</h3>
               <p>Grow up in Sri Lanka and cricket comes with you wherever you go. Playing or watching, it's how I switch off, and a reminder that the best teams win on trust, not just talent.</p>
-              <p class="credit">Photo: <a href="https://unsplash.com/photos/oDs_AxeR5g4" target="_blank" rel="noopener">Alessandro Bogliari</a> on Unsplash</p>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── Challenge ───────────────
+         Answers are checked against a salted SHA-256 hash; the answer itself is not on this site.
+         To add a solver, add an <li> to the [data-wall] list and remove the "empty" item. -->
+    <section class="challenge" id="challenge" aria-labelledby="challenge-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Code challenge · v1</p>
+          <h2 class="section-title" id="challenge-title">The lost commit</h2>
+          <p>A secret phrase is hidden in a repository history of 25,000 commits. Find it, and your name goes on the wall. Any language, any tools, no tricks needed. Just a correct algorithm.</p>
+        </header>
+
+        <div class="challenge__grid">
+          <article class="challenge__brief">
+            <h3>The brief</h3>
+            <ol class="challenge__steps">
+              <li>
+                <strong>Read the history.</strong> Each <code>c</code> line is one commit: its hash, a time, its parents (comma-separated, <code>-</code> for none) and a one-character message, where <code>_</code> means a space. The lines are in no particular order.
+              </li>
+              <li>
+                <strong>Answer the queries.</strong> For each <code>q a b</code> line, find the <em>merge base</em> of <code>a</code> and <code>b</code>: a commit that is an ancestor of both (a commit counts as its own ancestor) and is not an ancestor of any other such common ancestor. If there is more than one, take the one with the latest time.
+              </li>
+              <li>
+                <strong>Read the phrase.</strong> Write down each merge base's character, in query order. That phrase is your answer.
+              </li>
+            </ol>
+<pre class="challenge__format" aria-label="Input format example"><code><span class="tk-c"># c &lt;hash&gt; &lt;time&gt; &lt;parents&gt; &lt;char&gt;</span>
+c <span class="tk-p">9c88f1</span> 900 <span class="tk-p">8b5d40</span>,<span class="tk-p">6f6a19</span> t
+c <span class="tk-p">8b5d40</span> 800 <span class="tk-p">3c41d2</span> i
+<span class="tk-c"># q &lt;a&gt; &lt;b&gt;</span>
+q <span class="tk-p">6f6a19</span> <span class="tk-p">7a13c7</span></code></pre>
+            <p class="challenge__tip">Shortcuts like "the first shared commit I find" will give you a phrase that isn't one. Test your code on the sample first: its answer is printed at the bottom.</p>
+            <div class="challenge__actions">
+              <a class="btn btn--primary" href="challenge/input.txt" download="lost-commit-input.txt">Download input</a>
+              <a class="btn btn--ghost" href="challenge/sample.txt" target="_blank" rel="noopener">View sample</a>
+            </div>
+          </article>
+
+          <div class="challenge__side">
+            <form class="challenge__form" data-challenge data-hash="903df003261aa8a04816d099efced11b9791a719aca2fa3ee2846d48b75a8cbc" novalidate>
+              <label class="challenge__label" for="challenge-answer">Your answer</label>
+              <div class="challenge__row">
+                <input class="challenge__input" id="challenge-answer" name="answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="the secret phrase" required>
+                <button class="btn btn--primary" type="submit">Check</button>
+              </div>
+              <p class="challenge__result" role="status" aria-live="polite" data-result></p>
+              <div class="challenge__claim" data-claim hidden>
+                <p class="challenge__solved">Solved. Nicely done.</p>
+                <p>Your claim code:</p>
+                <div class="challenge__code">
+                  <code data-code></code>
+                  <button class="challenge__copy" type="button" data-copy>Copy</button>
+                </div>
+                <a class="btn btn--primary challenge__mail" data-mail href="mailto:anupama.dilshan@icloud.com">Claim your spot</a>
+                <p class="challenge__note">Send the code, not the answer. Please don't share the phrase, so others can enjoy it too.</p>
+              </div>
+            </form>
+
+            <aside class="challenge__wall" aria-labelledby="wall-title">
+              <h3 id="wall-title">Hall of fame</h3>
+              <ol class="wall" data-wall>
+                <li class="wall__empty">No solvers yet. Be the first.</li>
+              </ol>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -411,6 +495,8 @@
     <!-- ─────────────── Contact ─────────────── -->
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
+        <div class="contact__panel">
+        <div class="contact__intro">
         <p class="term term--static"><span class="term__path">~/anupama</span> <span class="term__sym">$</span> git commit -m "join your team"</p>
         <h2 class="contact__title" id="contact-title">Let's write the next commit together.</h2>
         <p class="contact__lede">Hiring for a software engineering role, or have a product you want built? I usually reply within a day.</p>
@@ -423,6 +509,40 @@
           <li><a href="https://medium.com/@anupama4you" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="5"/><ellipse cx="16.5" cy="12" rx="2.5" ry="5"/><ellipse cx="21.5" cy="12" rx="1" ry="4.5"/></svg>Medium</a></li>
         </ul>
+        </div>
+
+        <!-- Netlify Forms: detected at deploy time from the name + data-netlify attributes.
+             Submissions appear under Site > Forms; turn on email notifications there. -->
+        <form class="contact__form" name="contact" method="POST" data-netlify="true" netlify-honeypot="company" data-contact-form>
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+          <h3 class="contact__form-title">Shoot me a message</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" required>
+            </div>
+          </div>
+          <fieldset class="field">
+            <legend>What's it about?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="topic" value="Job opportunity" checked><span>Job opportunity</span></label>
+              <label class="chip"><input type="radio" name="topic" value="Project or freelance"><span>Project or freelance</span></label>
+              <label class="chip"><input type="radio" name="topic" value="Just saying hi"><span>Just saying hi</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+          <button class="btn btn--primary contact__send" type="submit">Send message</button>
+          <p class="contact__status" role="status" aria-live="polite" data-contact-status></p>
+        </form>
+        </div>
       </div>
     </section>
   </main>
@@ -430,7 +550,7 @@
   <footer class="footer">
     <div class="wrap footer__inner">
       <p>© 2026 Anupama Dilshan, Adelaide, South Australia</p>
-      <p>Hand-built with HTML, CSS and GSAP. No templates.</p>
+      <p>Still on main. More commits coming.</p>
     </div>
   </footer>
 
