@@ -1,0 +1,5 @@
+# Static site: no build step. index.html, styles.css, main.js and assets/ are served from the repo root.
+# This overrides the build command set in the Netlify UI (which was "." and broke the build).
+[build]
+  command = "echo 'No build step required'"
+  publish = "."
