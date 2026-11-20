@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anupama Dilshan · Full-stack software engineer</title>
+  <meta name="description" content="Anupama Dilshan is a full-stack software engineer in Adelaide building transport systems for the South Australian Government and shipping AI products. From Sri Lanka to South Australia, one commit at a time.">
+  <meta name="theme-color" content="#0C1C21">
+  <meta property="og:title" content="Anupama Dilshan · Full-stack software engineer">
+  <meta property="og:description" content="From Sri Lanka to South Australia, one commit at a time.">
+  <meta property="og:image" content="assets/img/me.webp">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+  <!-- ─────────────── Header ─────────────── -->
+  <header class="header" data-header>
+    <div class="header__inner">
+      <a class="brand" href="#top" aria-label="Anupama Dilshan, back to top">
+        <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M10 6v20" stroke="currentColor" stroke-opacity=".35" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M10 12c0 5 12 3 12 9" fill="none" stroke="var(--mint)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="10" cy="8" r="3" fill="var(--amber)"/><circle cx="22" cy="22" r="3" fill="var(--mint)"/><circle cx="10" cy="24" r="3" fill="currentColor"/>
+        </svg>
+        <span>anupama<span class="brand__tld">.dev</span></span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-btn>
+        <span class="menu-btn__lines" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Main" data-nav>
+        <a href="#story">Story</a>
+        <a href="#work">Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#life">Off the clock</a>
+        <a class="nav__cta" href="#contact">Get in touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ─────────────── Hero ─────────────── -->
+    <section class="hero" id="top">
+      <div class="hero__grid wrap">
+        <div class="hero__copy" data-hero-copy>
+          <p class="term" aria-label="Terminal: git log --reverse">
+            <span class="term__path">~/anupama</span>
+            <span class="term__sym">$</span>
+            <span class="term__cmd" data-type="git log --reverse">git log --reverse</span><span class="term__caret" aria-hidden="true"></span>
+          </p>
+          <h1 class="hero__title">
+            <span class="line"><span>Anupama Dilshan</span></span>
+            <span class="line line--soft"><span class="role" data-roles='["Full-stack software engineer.", "AI engineer.", "Machine learning engineer.", "Cloud engineer.", "Mobile app developer."]'><span class="sr-only">Full-stack software engineer</span><span class="role__text" aria-hidden="true">Full-stack software engineer.</span><span class="role__caret" aria-hidden="true"></span></span></span>
+          </h1>
+          <p class="hero__lede">
+            By day I build mission-critical transport systems for the South Australian Government.
+            By night I ship AI products.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#story">Read my story</a>
+            <a class="btn btn--ghost" href="#work">See my work</a>
+          </div>
+          <dl class="hero__facts">
+            <div><dt>Experience</dt><dd>6+ years</dd></div>
+            <div><dt>Education</dt><dd>MSc Computer Science, University of Adelaide</dd></div>
+            <div><dt>Based in</dt><dd>Adelaide, open to remote</dd></div>
+          </dl>
+        </div>
+
+        <figure class="hero__photo" data-hero-photo>
+          <div class="window">
+            <div class="window__bar" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="window__name">anupama.webp</span>
+            </div>
+            <img src="assets/img/me.webp" width="900" height="900" alt="Portrait of Anupama Dilshan smiling, wearing a dark blazer over a black t-shirt in a softly lit workspace" fetchpriority="high">
+          </div>
+          <figcaption class="status">
+            <span class="status__dot" aria-hidden="true"></span>
+            Open to new roles and interesting projects
+          </figcaption>
+        </figure>
+      </div>
+      <a class="scroll-cue" href="#story" aria-label="Scroll to story">
+        <span class="scroll-cue__track" aria-hidden="true"><span class="scroll-cue__thumb"></span></span>
+      </a>
+    </section>
+
+    <!-- ─────────────── Story ─────────────── -->
+    <section class="story" id="story" aria-labelledby="story-title">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="section-title" id="story-title">The story so far</h2>
+          <p class="story__preface" data-words>
+            Every engineer has a git log. Mine starts on an island in the Indian Ocean, takes a detour through
+            Egypt, and so far ends in Adelaide. It's not a straight line, and that's what made it.
+          </p>
+        </header>
+
+        <div class="log-wrap" data-log>
+        <div class="log__rail" aria-hidden="true"><span class="log__fill" data-log-fill></span></div>
+        <ol class="log">
+          <li class="commit" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <div class="commit__meta">
+              <code class="commit__hash">a1f3c0e</code>
+              <span class="commit__date">The beginning</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">init:</span> Sri Lanka</h3>
+            <p>I grew up in Sri Lanka, where curiosity about how things work turned into a love of building software. It's where I wrote my first lines of code and decided this was what I wanted to do for life.</p>
+          </li>
+
+          <li class="commit" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <div class="commit__meta">
+              <code class="commit__hash">7c2e91b</code>
+              <span class="commit__date">2020 – 2023</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">feat:</span> Software Engineer at IFS R&amp;D</h3>
+            <p>My first big stage. At IFS in Sri Lanka I worked on enterprise ERP software used by organisations around the world. I learned how large codebases, code reviews and real release cycles work, and what "production" actually means.</p>
+            <ul class="diff" aria-label="What I took away">
+              <li>enterprise-scale Java and ERP integrations</li>
+              <li>engineering discipline: reviews, testing, releases</li>
+            </ul>
+          </li>
+
+          <li class="commit" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <div class="commit__meta">
+              <code class="commit__hash">3e8d04a</code>
+              <span class="commit__date">2021</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">feat:</span> Full-stack developer for Devest, Egypt</h3>
+            <p>Alongside IFS, I took on a remote role with Devest in Egypt and built their bilingual company platform: English and Arabic, full right-to-left layout, admin dashboard and blog, all from one Laravel codebase. My first taste of working across time zones and cultures.</p>
+            <ul class="diff">
+              <li>Laravel, PHP, MySQL</li>
+              <li>RTL architecture and internationalisation</li>
+            </ul>
+          </li>
+
+          <li class="commit commit--leap" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <div class="commit__meta">
+              <code class="commit__hash">f00d2b7</code>
+              <span class="commit__date">2022</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">chore:</span> move to Australia</h3>
+            <p class="commit__lead">The biggest commit so far. I packed up my life and moved to Adelaide as a Global Citizens Scholar to do a master's in Computer Science at the University of Adelaide.</p>
+            <p>It wasn't easy. A new country, no local network, and the classic catch-22 of needing local experience to get local experience. I juggled full-time study with work, rebuilt my confidence from zero, and learned that most doors open if you keep knocking and keep shipping.</p>
+            <ul class="diff diff--mixed">
+              <li class="del">comfort zone</li>
+              <li>resilience, a new home and a lot of new friends</li>
+            </ul>
+          </li>
+
+          <li class="commit" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <div class="commit__meta">
+              <code class="commit__hash">b45a6e1</code>
+              <span class="commit__date">2022</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">feat:</span> first Australian role at Savvy Finance</h3>
+            <p>My first job in Australia: software engineering for a fintech in Adelaide. Proof that the knocking was working, and my introduction to how Australian teams build and ship.</p>
+          </li>
+
+          <li class="commit commit--branch" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <svg class="branch" viewBox="0 0 60 120" aria-hidden="true">
+              <path d="M2 0 C2 30 44 30 44 60 C44 90 2 90 2 120" />
+              <circle cx="44" cy="60" r="5" />
+            </svg>
+            <div class="commit__meta">
+              <code class="commit__hash">research/edge-ai</code>
+              <span class="commit__date">During my master's</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">merge:</span> published AI research</h3>
+            <p>At university I branched into applied AI and shipped two research projects end to end: <strong>WeCare</strong>, privacy-first fall detection on a Raspberry Pi, and <strong>CropSense</strong>, deep-learning leaf disease detection for growers. Both merged back as published research.</p>
+            <ul class="diff">
+              <li>PyTorch, TensorFlow, computer vision, edge AI</li>
+            </ul>
+          </li>
+
+          <li class="commit" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <div class="commit__meta">
+              <code class="commit__hash">9d1c7fa</code>
+              <span class="commit__date">2024 – present</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">feat:</span> Software Developer, Dept. for Infrastructure &amp; Transport SA</h3>
+            <p>Today I build mission-critical transport systems for the South Australian Government: software that real people across the state rely on every day, held to government-grade standards for security and reliability.</p>
+            <ul class="diff">
+              <li>government-grade security and compliance</li>
+              <li>systems where downtime isn't an option</li>
+            </ul>
+          </li>
+
+          <li class="commit commit--head" data-commit>
+            <span class="commit__node" aria-hidden="true"></span>
+            <div class="commit__meta">
+              <code class="commit__hash">HEAD → main</code>
+              <span class="commit__date">Now</span>
+            </div>
+            <h3 class="commit__msg"><span class="kw">wip:</span> building AI products</h3>
+            <p>After hours I turn ideas into products: an AI phone receptionist for small businesses, an AI caption generator, a commuter alarm app. The next commit could be with your team.</p>
+            <a class="link-arrow" href="#work">See what I've shipped</a>
+          </li>
+        </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── Work ─────────────── -->
+    <section class="work" id="work" aria-labelledby="work-title" data-work>
+      <div class="work__track" data-work-track>
+        <header class="work__intro">
+          <h2 class="section-title" id="work-title">Things I've shipped</h2>
+          <p>Live products, published research and client builds across AI, healthcare, e-commerce and mobile.</p>
+          <p class="work__hint" aria-hidden="true">Keep scrolling</p>
+        </header>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/ellie.webp" width="1400" height="788" loading="lazy" alt="Ellie AI receptionist dashboard showing recent calls and bookings"></div>
+          <div class="card__body">
+            <p class="card__cat">AI product, live</p>
+            <h3 class="card__title">Ellie, AI receptionist</h3>
+            <p>Answers every call 24/7, books appointments and sends SMS confirmations. It personalises itself to any business by reading its website, so there's no manual setup.</p>
+            <ul class="tags"><li>VAPI</li><li>GPT-4o</li><li>Serverless</li><li>SMS API</li></ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/captions4you.webp" width="1400" height="717" loading="lazy" alt="captions4you landing page"></div>
+          <div class="card__body">
+            <p class="card__cat">AI SaaS, live</p>
+            <h3 class="card__title">captions4you</h3>
+            <p>Generates platform-specific captions for Instagram, TikTok, YouTube and Facebook, with engagement scoring, virality prediction and a freemium plan.</p>
+            <ul class="tags"><li>GPT-4</li><li>React</li><li>TypeScript</li><li>Supabase</li></ul>
+            <div class="card__links">
+              <a href="https://captions4you.com" target="_blank" rel="noopener">Visit site</a>
+              <a href="https://github.com/anupama4you/caption-generator" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/wecare.webp" width="1400" height="1000" loading="lazy" alt="Three WeCare mobile app screens: sign up, sign in and login validation"></div>
+          <div class="card__body">
+            <p class="card__cat">Healthcare AI, published research</p>
+            <h3 class="card__title">WeCare</h3>
+            <p>Edge-AI fall detection and elderly monitoring on a Raspberry Pi with wearable sensors. All ML runs on-device, so sensitive data never leaves the home.</p>
+            <ul class="tags"><li>PyTorch</li><li>Flutter</li><li>Raspberry Pi</li><li>IoT</li></ul>
+            <div class="card__links">
+              <a href="assets/docs/wecare-research.pdf" target="_blank" rel="noopener">Read paper</a>
+              <a href="https://github.com/anupama4you/wecare" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/cropsense.webp" width="1000" height="1000" loading="lazy" alt="CropSense app screen diagnosing a plant leaf"></div>
+          <div class="card__body">
+            <p class="card__cat">Agriculture AI, published research</p>
+            <h3 class="card__title">CropSense</h3>
+            <p>Growers photograph a leaf and get an instant disease diagnosis with a confidence score and treatment advice.</p>
+            <ul class="tags"><li>TensorFlow</li><li>Flask</li><li>React</li></ul>
+            <div class="card__links">
+              <a href="assets/docs/cropsense-research.pdf" target="_blank" rel="noopener">Read paper</a>
+              <a href="https://github.com/anupama4you/Cropsense_" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/devest.webp" width="1400" height="875" loading="lazy" alt="Devest company website homepage"></div>
+          <div class="card__body">
+            <p class="card__cat">Client website</p>
+            <h3 class="card__title">Devest</h3>
+            <p>A bilingual English and Arabic company site with full right-to-left layout, admin dashboard, blog and portfolio, all from a single codebase.</p>
+            <ul class="tags"><li>Laravel</li><li>PHP</li><li>MySQL</li><li>RTL</li></ul>
+            <div class="card__links">
+              <a href="https://devest.co" target="_blank" rel="noopener">Visit site</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/zeil.webp" width="1400" height="1000" loading="lazy" alt="ZEIL Shopify theme storefront"></div>
+          <div class="card__body">
+            <p class="card__cat">E-commerce</p>
+            <h3 class="card__title">ZEIL Shopify theme</h3>
+            <p>A mobile-first Shopify theme built to raise order value and cut cart abandonment, with upsells, urgency cues and review integrations.</p>
+            <ul class="tags"><li>Shopify</li><li>Liquid</li><li>JavaScript</li></ul>
+            <div class="card__links">
+              <a href="https://github.com/anupama4you/zeil" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/ytdrop.webp" width="1400" height="933" loading="lazy" alt="YTDrop downloader interface"></div>
+          <div class="card__body">
+            <p class="card__cat">Developer tool</p>
+            <h3 class="card__title">YTDrop</h3>
+            <p>A clean YouTube video and audio downloader with no ads, no pop-ups and no sign-up. Paste a link, get the file. Self-hostable.</p>
+            <ul class="tags"><li>Node.js</li><li>Express</li><li>yt-dlp</li><li>Electron</li></ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="assets/img/wakemeup.webp" width="1280" height="720" loading="lazy" alt="WakeMeUp app showing a destination on a map with an alarm radius"></div>
+          <div class="card__body">
+            <p class="card__cat">iOS app, coming soon</p>
+            <h3 class="card__title">WakeMeUp</h3>
+            <p>Nap on the train without missing your stop. The alarm goes off when you're within a set distance of your destination, from 100 m to 5 km.</p>
+            <ul class="tags"><li>Flutter</li><li>Dart</li><li>Google Maps</li><li>GPS</li></ul>
+            <div class="card__links">
+              <a href="https://github.com/anupama4you/wake-me-up" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <a class="card card--more" href="https://github.com/anupama4you" target="_blank" rel="noopener">
+          <span class="card--more__label">More on GitHub</span>
+          <span class="card--more__handle">@anupama4you</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─────────────── Stack ─────────────── -->
+    <section class="stack" id="stack" aria-labelledby="stack-title">
+      <div class="wrap stack__grid">
+        <header class="section-head">
+          <h2 class="section-title" id="stack-title">What I build with</h2>
+          <p>Six years of production work, from frontend to cloud, AI to mobile. I pick the right tool for the job, then learn whatever else the job needs.</p>
+        </header>
+
+        <div class="editor" data-editor>
+          <div class="window__bar" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="window__name">stack.ts</span>
+          </div>
+<pre class="code" aria-label="Tech stack"><code><span class="ln"><span class="tk-k">export const</span> <span class="tk-v">stack</span> = {</span>
+<span class="ln">  <span class="tk-p">languages</span>: [<span class="tk-s">'Java'</span>, <span class="tk-s">'Python'</span>, <span class="tk-s">'TypeScript'</span>, <span class="tk-s">'C#'</span>, <span class="tk-s">'Dart'</span>, <span class="tk-s">'Kotlin'</span>, <span class="tk-s">'PHP'</span>],</span>
+<span class="ln">  <span class="tk-p">frontend</span>: [<span class="tk-s">'React'</span>, <span class="tk-s">'Angular'</span>, <span class="tk-s">'Next.js'</span>, <span class="tk-s">'Flutter'</span>, <span class="tk-s">'Tailwind CSS'</span>],</span>
+<span class="ln">  <span class="tk-p">backend</span>: [<span class="tk-s">'Node.js'</span>, <span class="tk-s">'Express'</span>, <span class="tk-s">'Spring Boot'</span>, <span class="tk-s">'ASP.NET'</span>, <span class="tk-s">'Laravel'</span>, <span class="tk-s">'Flask'</span>, <span class="tk-s">'GraphQL'</span>],</span>
+<span class="ln">  <span class="tk-p">cloud</span>: [<span class="tk-s">'AWS'</span>, <span class="tk-s">'Azure'</span>, <span class="tk-s">'GCP'</span>, <span class="tk-s">'Docker'</span>, <span class="tk-s">'Kubernetes'</span>, <span class="tk-s">'CI/CD'</span>],</span>
+<span class="ln">  <span class="tk-p">ai</span>: [<span class="tk-s">'PyTorch'</span>, <span class="tk-s">'TensorFlow'</span>, <span class="tk-s">'OpenCV'</span>, <span class="tk-s">'Hugging Face'</span>, <span class="tk-s">'OpenAI'</span>, <span class="tk-s">'Gemini'</span>],</span>
+<span class="ln">  <span class="tk-p">data</span>: [<span class="tk-s">'PostgreSQL'</span>, <span class="tk-s">'MySQL'</span>, <span class="tk-s">'MongoDB'</span>, <span class="tk-s">'Firebase'</span>, <span class="tk-s">'Oracle'</span>, <span class="tk-s">'SQLite'</span>],</span>
+<span class="ln">  <span class="tk-p">alsoGoodAt</span>: [<span class="tk-s">'shipping'</span>, <span class="tk-s">'learning fast'</span>, <span class="tk-s">'explaining tech to non-tech people'</span>],</span>
+<span class="ln">};</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── Life ─────────────── -->
+    <section class="life" id="life" aria-labelledby="life-title">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="section-title" id="life-title">Off the clock</h2>
+          <p>The things that recharge me, and quietly make me a better engineer.</p>
+        </header>
+
+        <div class="life__grid">
+          <!-- Travel -->
+          <article class="hobby hobby--travel" data-hobby="travel">
+            <figure class="hobby__art hobby__art--photo">
+              <img src="assets/img/hobby-travel.webp" width="1000" height="600" loading="lazy" alt="A blue train crossing the Nine Arches Bridge through green hills in Ella, Sri Lanka">
+            </figure>
+            <div class="hobby__body">
+              <h3>Travelling</h3>
+              <p>I've lived and worked across three countries, and I'm always planning the next trip. New places reset how I think, and nothing teaches you to work with different people faster.</p>
+              <p class="credit">Photo: <a href="https://unsplash.com/photos/jpTT_SAU034" target="_blank" rel="noopener">Hendrik Cornelissen</a> on Unsplash</p>
+            </div>
+          </article>
+
+          <!-- Content creation -->
+          <article class="hobby hobby--create" data-hobby="create">
+            <figure class="hobby__art hobby__art--photo">
+              <img src="assets/img/hobby-create.webp" width="1000" height="600" loading="lazy" alt="A creator's desk with two monitors, cameras, lenses and a glowing light pad">
+            </figure>
+            <div class="hobby__body">
+              <h3>Content creation</h3>
+              <p>I write about what I build, the tools I use and the gear on my desk. Explaining something clearly is the best test of whether I really understand it.</p>
+              <a class="link-arrow" href="https://medium.com/@anupama4you" target="_blank" rel="noopener">Read on Medium</a>
+              <p class="credit">Photo: <a href="https://unsplash.com/photos/aSoQQLyPe1U" target="_blank" rel="noopener">Jakub Żerdzicki</a> on Unsplash</p>
+            </div>
+          </article>
+
+          <!-- Cricket -->
+          <article class="hobby hobby--cricket" data-hobby="cricket">
+            <figure class="hobby__art hobby__art--photo">
+              <img src="assets/img/hobby-cricket.webp" width="1000" height="600" loading="lazy" alt="A worn red cricket ball resting in green grass">
+            </figure>
+            <div class="hobby__body">
+              <h3>Cricket</h3>
+              <p>Grow up in Sri Lanka and cricket comes with you wherever you go. Playing or watching, it's how I switch off, and a reminder that the best teams win on trust, not just talent.</p>
+              <p class="credit">Photo: <a href="https://unsplash.com/photos/oDs_AxeR5g4" target="_blank" rel="noopener">Alessandro Bogliari</a> on Unsplash</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────── Contact ─────────────── -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <p class="term term--static"><span class="term__path">~/anupama</span> <span class="term__sym">$</span> git commit -m "join your team"</p>
+        <h2 class="contact__title" id="contact-title">Let's write the next commit together.</h2>
+        <p class="contact__lede">Hiring for a software engineering role, or have a product you want built? I usually reply within a day.</p>
+        <a class="contact__email" href="mailto:anupama.dilshan@icloud.com">anupama.dilshan@icloud.com</a>
+        <ul class="socials">
+          <li><a href="https://www.linkedin.com/in/anupama-dilshan" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg>LinkedIn</a></li>
+          <li><a href="https://github.com/anupama4you" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a></li>
+          <li><a href="https://medium.com/@anupama4you" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="5"/><ellipse cx="16.5" cy="12" rx="2.5" ry="5"/><ellipse cx="21.5" cy="12" rx="1" ry="4.5"/></svg>Medium</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>© 2026 Anupama Dilshan, Adelaide, South Australia</p>
+      <p>Hand-built with HTML, CSS and GSAP. No templates.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
+</html>
