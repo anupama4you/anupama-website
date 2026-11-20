@@ -4,3 +4,6 @@ node_modules/
 .env
 .DS_Store
 Thumbs.db
+
+# Code challenge secrets (generator, answer). Never commit or deploy.
+.challenge/

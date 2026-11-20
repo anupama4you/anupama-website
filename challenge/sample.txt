@@ -1,0 +1,20 @@
+# The lost commit: anupama.dev code challenge v1
+# c <hash> <time> <parents> <char>   parents comma-separated, "-" for none, "_" means a space
+# q <a> <b>                          find the merge base of a and b; its char is one letter of the answer
+# Sample: the answer for this file is shown at the bottom.
+c c2f913 1200 9c88f1 o
+c b1e7a9 1100 a0d2e5 e
+c a0d2e5 1000 8b5d40 r
+c 9c88f1 900 8b5d40,6f6a19 t
+c 8b5d40 800 3c41d2 i
+c 7a13c7 700 5e02bb w
+c 6f6a19 600 4d9e8a p
+c 5e02bb 500 3c41d2,2b7f10 k
+c 4d9e8a 400 2b7f10,3c41d2 m
+c 3c41d2 300 1a0c3e g
+c 2b7f10 200 1a0c3e q
+c 1a0c3e 100 - x
+q 6f6a19 7a13c7
+q c2f913 b1e7a9
+q 9c88f1 c2f913
+# Answer: git
