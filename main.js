@@ -69,6 +69,7 @@
     const input = $('#challenge-answer', form);
     const result = $('[data-result]', form);
     const claim = $('[data-claim]', form);
+    let tries = -1;
     const normalize = (s) => s.toLowerCase().replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
     const sha256 = async (s) => {
       const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
@@ -82,7 +83,16 @@
       const ok = (await sha256('anupama.dev/challenge/v1:' + answer)) === form.dataset.hash;
       result.classList.toggle('is-wrong', !ok);
       if (!ok) {
-        result.textContent = 'Not quite. Check your merge-base rules and try again.';
+        const nope = [
+          'Nope. That\'s a merge conflict with reality.',
+          'Not quite. Have you tried turning your algorithm off and on again?',
+          'Close? Maybe. Correct? No.',
+          'git status: still lost.',
+          'That phrase has never been committed. Check the tie-break rule.',
+          'Wrong, but in a very confident way. Respect.',
+        ];
+        tries = (tries + 1) % nope.length;
+        result.textContent = nope[tries];
         form.classList.remove('is-shake'); void form.offsetWidth; form.classList.add('is-shake');
         return;
       }
@@ -90,7 +100,7 @@
       const code = `${h.slice(0, 4)}-${h.slice(4, 8)}-${h.slice(8)}`;
       result.textContent = '';
       $('[data-code]', form).textContent = code;
-      const body = `Hi Anupama,\n\nI solved The lost commit.\n\nClaim code: ${code}\nName for the wall: \nLink (GitHub, LinkedIn or site, optional): \nLanguage I solved it in: \n`;
+      const body = `Hi Anupama,\n\nI found the lost commit. Make room on the wall.\n\nClaim code: ${code}\nName for the wall: \nLink (GitHub, LinkedIn or site, optional): \nLanguage I solved it in: \n`;
       $('[data-mail]', form).href = `mailto:anupama.dilshan@icloud.com?subject=${encodeURIComponent(`The lost commit: claim ${code}`)}&body=${encodeURIComponent(body)}`;
       claim.hidden = false;
       $('[data-copy]', form).focus();

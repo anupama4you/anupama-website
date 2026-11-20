@@ -53,6 +53,7 @@
   --role-grad: linear-gradient(90deg, #0071E3 0%, #7B5CFA 50%, #E8508A 100%);
   --icon-sun: none; --icon-moon: block;
   --photo-light: block; --photo-dark: none;
+  --group-bg: #FFFFFF; --seg-track: rgba(118, 118, 128, .12); --seg-thumb: #FFFFFF;
 }
 
 /* Dark theme: follows the device unless the visitor picked light; the header toggle sets data-theme */
@@ -88,6 +89,7 @@
     --role-grad: linear-gradient(90deg, #409CFF 0%, #A78BFA 50%, #FF7EB3 100%);
     --icon-sun: block; --icon-moon: none;
     --photo-light: none; --photo-dark: block;
+    --group-bg: #2C2C2E; --seg-track: rgba(118, 118, 128, .24); --seg-thumb: #636366;
   }
 }
 :root[data-theme="dark"] {
@@ -121,6 +123,7 @@
   --role-grad: linear-gradient(90deg, #409CFF 0%, #A78BFA 50%, #FF7EB3 100%);
   --icon-sun: block; --icon-moon: none;
     --photo-light: none; --photo-dark: block;
+    --group-bg: #2C2C2E; --seg-track: rgba(118, 118, 128, .24); --seg-thumb: #636366;
 }
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] { color-scheme: dark; }
@@ -251,11 +254,11 @@ body::before {
 .section-title { font-size: clamp(2.2rem, 4.8vw, 3.75rem); letter-spacing: -0.035em; }
 .section-head p { color: var(--text-2); max-width: 52ch; margin-top: 16px; font-size: 1.15rem; }
 
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 999px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform .25s var(--spring), background-color .2s, box-shadow .2s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border: 0; border-radius: 999px; font-family: inherit; font-weight: 600; font-size: 1rem; text-decoration: none; cursor: pointer; transition: transform .25s var(--spring), background-color .2s, box-shadow .2s; }
 .btn:active { transform: scale(.96); }
 .btn--primary { background: var(--blue); color: #fff; box-shadow: 0 6px 20px -6px color-mix(in srgb, var(--blue) 60%, transparent); }
 .btn--primary:hover { background: var(--blue-hover); }
-.btn--ghost { color: var(--text); }
+.btn--ghost { color: var(--text); border: 1px solid var(--glass-edge); }
 .btn--ghost:hover { background: var(--glass-strong); }
 
 .link-arrow { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: var(--blue-text); font-weight: 500; text-decoration: none; }
@@ -589,46 +592,78 @@ main { overflow-x: clip; }
 .contact__panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
 .contact__title { margin-top: 18px; font-size: clamp(2.3rem, 4.6vw, 4rem); letter-spacing: -0.045em; max-width: 14ch; }
 .contact__lede { margin-top: 20px; color: var(--text-2); font-size: 1.2rem; max-width: 48ch; }
-.contact__email { display: inline-block; margin-top: 32px; font-size: clamp(1.25rem, 3.4vw, 2.2rem); font-weight: 650; letter-spacing: -0.025em; color: var(--blue-text); text-decoration: none; overflow-wrap: anywhere; }
+.contact__intro { min-width: 0; container-type: inline-size; }
+/* Sized to its own column so the address always fits on one line */
+.contact__email { display: inline-block; margin-top: 32px; font-size: clamp(1rem, 2vw, 1.6rem); font-weight: 650; letter-spacing: -0.025em; color: var(--blue-text); text-decoration: none; white-space: nowrap; }
+@supports (container-type: inline-size) {
+  .contact__email { font-size: clamp(1rem, 6.2cqi, 2rem); }
+}
 .contact__email:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
 .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
 .socials a { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 18px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: .95rem; transition: transform .25s var(--spring), background-color .2s; }
 .socials a:hover { background: var(--glass-strong); }
 .socials a:active { transform: scale(.96); }
-/* Message form */
-.contact__form { display: grid; gap: 16px; padding: clamp(20px, 3vw, 28px); border-radius: var(--radius); background: var(--glass-strong); border: 1px solid var(--glass-edge); box-shadow: var(--glass-hi), var(--shadow); }
-.contact__form-title { font-size: 1.35rem; letter-spacing: -0.02em; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.field { display: grid; gap: 6px; min-width: 0; margin: 0; padding: 0; border: 0; }
-.field label, .field legend { font-size: .86rem; font-weight: 600; color: var(--text-2); padding: 0; }
-.field legend { margin-bottom: 6px; }
-.field input, .field textarea {
-  width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
-  border: 1px solid var(--line); background: var(--fill); color: var(--text);
-  font: inherit; font-size: 1rem; transition: border-color .2s, box-shadow .2s, background-color .2s;
+/* Message form, built like an iOS / macOS form */
+.contact__form { display: grid; gap: 14px; align-content: start; }
+.contact__form-title { font-size: 1.35rem; letter-spacing: -0.022em; margin-bottom: 4px; }
+
+/* Segmented control with a sliding thumb */
+.segmented {
+  position: relative; display: grid; grid-template-columns: repeat(3, 1fr);
+  margin: 0; padding: 2px; border: 0; border-radius: 10px; background: var(--seg-track);
 }
-.field textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--blue); background: var(--glass-strong); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 22%, transparent); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip input { position: absolute; opacity: 0; pointer-events: none; }
-.chip span { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; background: var(--fill); color: var(--text-2); font-size: .9rem; font-weight: 500; cursor: pointer; transition: background-color .2s, color .2s; }
-.chip span:hover { color: var(--text); }
-.chip input:checked + span { background: var(--blue); color: #fff; }
-.chip input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--blue) 55%, transparent); outline-offset: 2px; }
-.contact__send { justify-self: start; }
+.segmented::before {
+  content: ""; position: absolute; top: 2px; bottom: 2px; left: 2px; width: calc((100% - 4px) / 3);
+  border-radius: 8px; background: var(--seg-thumb);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .12), 0 3px 1px rgba(0, 0, 0, .04);
+  transition: transform .35s var(--spring);
+}
+.segmented:has(label:nth-of-type(2) input:checked)::before { transform: translateX(100%); }
+.segmented:has(label:nth-of-type(3) input:checked)::before { transform: translateX(200%); }
+.segmented label { position: relative; z-index: 1; cursor: pointer; }
+.segmented input { position: absolute; opacity: 0; pointer-events: none; }
+.segmented span { display: grid; place-items: center; height: 32px; font-size: .9rem; font-weight: 500; color: var(--text); border-radius: 8px; transition: font-weight .2s; }
+.segmented input:checked + span { font-weight: 600; }
+.segmented input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--blue) 55%, transparent); outline-offset: 0; }
+/* Browsers without :has() still get a clear selected state */
+@supports not selector(:has(*)) {
+  .segmented::before { display: none; }
+  .segmented input:checked + span { background: var(--seg-thumb); box-shadow: 0 3px 8px rgba(0, 0, 0, .12); }
+}
+
+/* Inset grouped list: one rounded block, hairlines between rows */
+.group { border-radius: 12px; background: var(--group-bg); overflow: hidden; transition: box-shadow .2s; }
+.group:focus-within { box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 20%, transparent); }
+.float { position: relative; }
+.float + .float::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--line); }
+.float input, .float textarea {
+  display: block; width: 100%; border: 0; background: transparent; color: var(--text);
+  font: inherit; font-size: 1.0625rem; padding: 24px 16px 8px; outline: none;
+}
+.float textarea { resize: none; min-height: 136px; line-height: 1.45; padding-top: 28px; }
+.float label {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%); transform-origin: left center;
+  color: var(--text-2); font-size: 1.0625rem; pointer-events: none;
+  transition: transform .2s var(--ease), color .2s, top .2s var(--ease);
+}
+.float--area label { top: 26px; }
+/* Label floats up once the field is focused or filled */
+.float input:focus + label, .float input:not(:placeholder-shown) + label,
+.float textarea:focus + label, .float textarea:not(:placeholder-shown) + label { top: 16px; transform: translateY(-50%) scale(.76); }
+.float--area textarea:focus + label, .float--area textarea:not(:placeholder-shown) + label { top: 14px; }
+.float input:focus + label, .float textarea:focus + label { color: var(--blue-text); }
+
+.contact__send { width: 100%; min-height: 50px; font-size: 1.0625rem; }
 .contact__send[disabled] { opacity: .6; cursor: progress; }
-.contact__status { min-height: 1.4em; font-size: .95rem; font-weight: 500; color: var(--text-2); }
-.contact__status.is-ok { color: var(--green-text); }
+.contact__status { min-height: 1.4em; font-size: .95rem; font-weight: 500; color: var(--text-2); text-align: center; }
+.contact__status.is-ok { color: var(--green-text); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.contact__status.is-ok::before { content: "✓"; flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: #fff; font-size: .8rem; font-weight: 700; }
 .contact__status.is-error { color: var(--red-text); }
 .contact__status a { color: inherit; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 @media (max-width: 960px) {
   .contact__panel { grid-template-columns: 1fr; }
-}
-@media (max-width: 520px) {
-  .field-row { grid-template-columns: 1fr; }
-  .contact__send { justify-self: stretch; }
 }
 
 .socials svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

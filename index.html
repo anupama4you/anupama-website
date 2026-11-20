@@ -430,23 +430,23 @@
     <section class="challenge" id="challenge" aria-labelledby="challenge-title">
       <div class="wrap">
         <header class="section-head">
-          <p class="eyebrow">Code challenge · v1</p>
+          <p class="eyebrow">Side quest · optional · highly addictive</p>
           <h2 class="section-title" id="challenge-title">The lost commit</h2>
-          <p>A secret phrase is hidden in a repository history of 25,000 commits. Find it, and your name goes on the wall. Any language, any tools, no tricks needed. Just a correct algorithm.</p>
+          <p>Someone (me) hid a secret message inside 25,000 commits and then, very responsibly, shuffled them. Dig it out and your name goes on the wall of fame, forever. Or until I redesign the site again. Any language, any tools. Yes, even that one.</p>
         </header>
 
         <div class="challenge__grid">
           <article class="challenge__brief">
-            <h3>The brief</h3>
+            <h3>The mission</h3>
             <ol class="challenge__steps">
               <li>
-                <strong>Read the history.</strong> Each <code>c</code> line is one commit: its hash, a time, its parents (comma-separated, <code>-</code> for none) and a one-character message, where <code>_</code> means a space. The lines are in no particular order.
+                <strong>Make sense of the mess.</strong> Each <code>c</code> line is a commit: its hash, a time, its parents (comma-separated, <code>-</code> if it's an orphan) and a one-character commit message, because that's all the team ever writes anyway. <code>_</code> means a space. The lines are shuffled. You're welcome.
               </li>
               <li>
-                <strong>Answer the queries.</strong> For each <code>q a b</code> line, find the <em>merge base</em> of <code>a</code> and <code>b</code>: a commit that is an ancestor of both (a commit counts as its own ancestor) and is not an ancestor of any other such common ancestor. If there is more than one, take the one with the latest time.
+                <strong>Play family therapist.</strong> For each <code>q a b</code> line, find the <em>merge base</em> of <code>a</code> and <code>b</code>: a commit that is an ancestor of both (a commit counts as its own ancestor) and isn't an ancestor of any other such common ancestor. Some pairs have more than one, because branches merged into each other like it was a group project. In that case, take the one with the latest time.
               </li>
               <li>
-                <strong>Read the phrase.</strong> Write down each merge base's character, in query order. That phrase is your answer.
+                <strong>Read the tea leaves.</strong> Write down each merge base's character, in query order. If it reads like an actual sentence, congrats. If it reads like a cat walked across your keyboard, see below.
               </li>
             </ol>
 <pre class="challenge__format" aria-label="Input format example"><code><span class="tk-c"># c &lt;hash&gt; &lt;time&gt; &lt;parents&gt; &lt;char&gt;</span>
@@ -454,10 +454,10 @@ c <span class="tk-p">9c88f1</span> 900 <span class="tk-p">8b5d40</span>,<span cl
 c <span class="tk-p">8b5d40</span> 800 <span class="tk-p">3c41d2</span> i
 <span class="tk-c"># q &lt;a&gt; &lt;b&gt;</span>
 q <span class="tk-p">6f6a19</span> <span class="tk-p">7a13c7</span></code></pre>
-            <p class="challenge__tip">Shortcuts like "the first shared commit I find" will give you a phrase that isn't one. Test your code on the sample first: its answer is printed at the bottom.</p>
+            <p class="challenge__tip">Heads up: "just grab the first shared commit" is exactly what the history was designed to punish. You'll get pure keyboard smash. Try the sample first. Its answer is printed at the bottom, no judgement.</p>
             <div class="challenge__actions">
-              <a class="btn btn--primary" href="challenge/input.txt" download="lost-commit-input.txt">Download input</a>
-              <a class="btn btn--ghost" href="challenge/sample.txt" target="_blank" rel="noopener">View sample</a>
+              <a class="btn btn--primary" href="challenge/input.txt" download="lost-commit-input.txt">Download the chaos</a>
+              <a class="btn btn--ghost" href="challenge/sample.txt" target="_blank" rel="noopener">Peek at the sample</a>
             </div>
           </article>
 
@@ -465,26 +465,26 @@ q <span class="tk-p">6f6a19</span> <span class="tk-p">7a13c7</span></code></pre>
             <form class="challenge__form" data-challenge data-hash="903df003261aa8a04816d099efced11b9791a719aca2fa3ee2846d48b75a8cbc" novalidate>
               <label class="challenge__label" for="challenge-answer">Your answer</label>
               <div class="challenge__row">
-                <input class="challenge__input" id="challenge-answer" name="answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="the secret phrase" required>
-                <button class="btn btn--primary" type="submit">Check</button>
+                <input class="challenge__input" id="challenge-answer" name="answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type the secret, no peeking at DevTools" required>
+                <button class="btn btn--primary" type="submit">Moment of truth</button>
               </div>
               <p class="challenge__result" role="status" aria-live="polite" data-result></p>
               <div class="challenge__claim" data-claim hidden>
-                <p class="challenge__solved">Solved. Nicely done.</p>
-                <p>Your claim code:</p>
+                <p class="challenge__solved">You absolute legend. 🎉</p>
+                <p>Here's your proof of greatness:</p>
                 <div class="challenge__code">
                   <code data-code></code>
                   <button class="challenge__copy" type="button" data-copy>Copy</button>
                 </div>
-                <a class="btn btn--primary challenge__mail" data-mail href="mailto:anupama.dilshan@icloud.com">Claim your spot</a>
-                <p class="challenge__note">Send the code, not the answer. Please don't share the phrase, so others can enjoy it too.</p>
+                <a class="btn btn--primary challenge__mail" data-mail href="mailto:anupama.dilshan@icloud.com">Claim your spot on the wall</a>
+                <p class="challenge__note">Send the code, not the answer. And please don't post the phrase online. Let others suffer too, it builds character.</p>
               </div>
             </form>
 
             <aside class="challenge__wall" aria-labelledby="wall-title">
-              <h3 id="wall-title">Hall of fame</h3>
+              <h3 id="wall-title">Wall of fame</h3>
               <ol class="wall" data-wall>
-                <li class="wall__empty">No solvers yet. Be the first.</li>
+                <li class="wall__empty">Currently empty. Like my inbox before this site. Be the first.</li>
               </ol>
             </aside>
           </div>
@@ -506,8 +506,8 @@ q <span class="tk-p">6f6a19</span> <span class="tk-p">7a13c7</span></code></pre>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg>LinkedIn</a></li>
           <li><a href="https://github.com/anupama4you" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a></li>
-          <li><a href="https://medium.com/@anupama4you" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="5"/><ellipse cx="16.5" cy="12" rx="2.5" ry="5"/><ellipse cx="21.5" cy="12" rx="1" ry="4.5"/></svg>Medium</a></li>
+          <li><a href="https://www.instagram.com/anupama4you/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r=".6" fill="currentColor"/></svg>Instagram</a></li>
         </ul>
         </div>
 
@@ -517,28 +517,31 @@ q <span class="tk-p">6f6a19</span> <span class="tk-p">7a13c7</span></code></pre>
           <input type="hidden" name="form-name" value="contact">
           <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
           <h3 class="contact__form-title">Shoot me a message</h3>
-          <div class="field-row">
-            <div class="field">
-              <label for="cf-name">Name</label>
-              <input id="cf-name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="cf-email">Email</label>
-              <input id="cf-email" name="email" type="email" autocomplete="email" required>
-            </div>
-          </div>
-          <fieldset class="field">
-            <legend>What's it about?</legend>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="topic" value="Job opportunity" checked><span>Job opportunity</span></label>
-              <label class="chip"><input type="radio" name="topic" value="Project or freelance"><span>Project or freelance</span></label>
-              <label class="chip"><input type="radio" name="topic" value="Just saying hi"><span>Just saying hi</span></label>
-            </div>
+
+          <!-- iOS-style segmented control (radio buttons underneath) -->
+          <fieldset class="segmented">
+            <legend class="sr-only">What's it about?</legend>
+            <label><input type="radio" name="topic" value="Job opportunity" checked><span>Job</span></label>
+            <label><input type="radio" name="topic" value="Project or freelance"><span>Project</span></label>
+            <label><input type="radio" name="topic" value="Just saying hi"><span>Say hi</span></label>
           </fieldset>
-          <div class="field">
-            <label for="cf-message">Message</label>
-            <textarea id="cf-message" name="message" rows="5" required></textarea>
+
+          <!-- Grouped fields with floating labels -->
+          <div class="group">
+            <div class="float">
+              <input id="cf-name" name="name" type="text" autocomplete="name" placeholder=" " required>
+              <label for="cf-name">Name</label>
+            </div>
+            <div class="float">
+              <input id="cf-email" name="email" type="email" autocomplete="email" placeholder=" " required>
+              <label for="cf-email">Email</label>
+            </div>
+            <div class="float float--area">
+              <textarea id="cf-message" name="message" rows="5" placeholder=" " required></textarea>
+              <label for="cf-message">Message</label>
+            </div>
           </div>
+
           <button class="btn btn--primary contact__send" type="submit">Send message</button>
           <p class="contact__status" role="status" aria-live="polite" data-contact-status></p>
         </form>
